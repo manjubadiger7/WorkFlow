@@ -1,0 +1,32 @@
+
+
+
+<h1>CSV File Reading</h1>
+
+
+
+<div data-sly-use.model="workFlowProject.core.models.CsvFileReaderModel"></div>
+
+
+
+<p>=================================================================================================</p>
+
+
+
+<h3>CSV File reading using the one Single String function</h3>
+<div>${model.pagePath}</div>
+
+
+
+<p>=================================================================================================</p>
+<h3>CSV File reading using the Buffered reader</h3>
+<div data-sly-list.item="${model.page}">
+	<ul>
+		<li>${item}</li>
+	</ul>
+
+</div>
+
+
+
+<p>=================================================================================================</p>
