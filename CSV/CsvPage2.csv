@@ -1,0 +1,2 @@
+pageName,pageTemplate,pageTitle,pageParent,pageDescription
+CsvPage,/conf/workFlowProject/settings/wcm/templates,CsvPageCretion,/content/workFlowProject/en,This is sample Csv Page
