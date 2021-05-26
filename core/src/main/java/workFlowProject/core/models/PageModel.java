@@ -6,13 +6,24 @@ public class PageModel {
 	private String pageTemplate;
 	private String pageTitle;
 	private String pageParent;
+	private String pageDescription;
 
-	public PageModel(String pageName, String pageTemplate, String pageTitle, String pageParent) {
+	public PageModel(String pageName, String pageTemplate, String pageTitle, String pageParent,
+			String pageDescription) {
 		super();
 		this.pageName = pageName;
 		this.pageTemplate = pageTemplate;
 		this.pageTitle = pageTitle;
 		this.pageParent = pageParent;
+		this.pageDescription = pageDescription;
+	}
+
+	public String getPageDescription() {
+		return pageDescription;
+	}
+
+	public void setPageDescription(String pageDescription) {
+		this.pageDescription = pageDescription;
 	}
 
 	public PageModel() {

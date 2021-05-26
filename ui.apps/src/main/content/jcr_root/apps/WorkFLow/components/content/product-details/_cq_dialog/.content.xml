@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Body"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container"
+        margin="{Boolean}false">
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <title
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Title"
+                        name="./title"/>
+                    <description
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Description"
+                        name="./description"/>
+                    <price
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                        fieldLabel="Price"
+                        name="./price"/>
+                    <multi
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <authors
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                composite="{Boolean}false"
+                                fieldLabel="Authors">
+                                <field
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fielLabel="Author Name"
+                                    name="./author"/>
+                            </authors>
+                        </items>
+                    </multi>
+                    <language
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        emptyText="Language"
+                        fieldLabel="Language"
+                        name="./language">
+                        <items jcr:primaryType="nt:unstructured">
+                            <option1
+                                jcr:primaryType="nt:unstructured"
+                                text="English"
+                                value="english"/>
+                            <option2
+                                jcr:primaryType="nt:unstructured"
+                                text="Spanish"
+                                value="spanish"/>
+                        </items>
+                    </language>
+                    <publisher
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Publisher"
+                        name="./publisher"/>
+                    <file
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                        autoStart="{Boolean}false"
+                        class="cq-droptarget"
+                        fieldLabel="Image asset"
+                        fileNameParameter="./fileName"
+                        fileReferenceParameter="./fileReference"
+                        mimeTypes="[image/gif,image/jpeg,image/png,image/tiff,image/svg+xml]"
+                        multiple="{Boolean}false"
+                        name="./file"
+                        title="Upload Image Asset"
+                        uploadUrl="${suffix.path}"
+                        useHTML5="{Boolean}true"/>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>

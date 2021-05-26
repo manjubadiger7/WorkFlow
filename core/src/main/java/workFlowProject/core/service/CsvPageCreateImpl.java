@@ -1,39 +1,38 @@
 package workFlowProject.core.service;
 
-import com.day.cq.wcm.api.PageManager;
-
-import com.day.cq.wcm.api.WCMException;
-
-import workFlowProject.core.models.PageModel;
-
-import com.day.cq.wcm.api.Page;
-
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import com.day.cq.dam.api.Asset;
-import com.day.cq.dam.api.Rendition;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
+import org.apache.sling.api.resource.LoginException;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
-
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ResourceResolverFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.sling.api.resource.LoginException;
+import com.day.cq.dam.api.Asset;
+import com.day.cq.dam.api.Rendition;
+import com.day.cq.replication.PathNotFoundException;
+import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
+import com.day.cq.wcm.api.WCMException;
+
+import workFlowProject.core.models.PageModel;
 
 @Component(service = CsvPageCreate.class, immediate = true)
 public class CsvPageCreateImpl implements CsvPageCreate {
@@ -45,7 +44,7 @@ public class CsvPageCreateImpl implements CsvPageCreate {
 
 	public static final String SERVICE_NAME = "variableName";
 
-	public static final String RESOURCE_PATH = "/content/dam/workFlowProject/CSV/CsvPage.csv";
+	public static final String RESOURCE_PATH = "/content/dam/workFlowProject/CSV/CsvPage2.csv";
 
 	ResourceResolver resourceResolver = null;
 
@@ -89,6 +88,7 @@ public class CsvPageCreateImpl implements CsvPageCreate {
 				pageModel.setPageName(arr[0].trim());
 				pageModel.setPageTemplate(arr[1].trim());
 				pageModel.setPageTitle(arr[2].trim());
+				pageModel.setPageDescription(arr[4].trim());
 				return pageModel;
 			}).collect(Collectors.toList());
 		} catch (Exception e) {
@@ -116,6 +116,9 @@ public class CsvPageCreateImpl implements CsvPageCreate {
 
 	@Override
 	public List<Page> createPage() {
+
+		Session session = resourceResolver.adaptTo(Session.class);
+
 		List<Page> pagesCreated = new LinkedList<>();
 		List<PageModel> pageProperties = getCsvContent(); // excluded the csv for now
 		LOG.info("******************        Hi i am comming from create Page *******************************");
@@ -136,6 +139,24 @@ public class CsvPageCreateImpl implements CsvPageCreate {
 
 				Page page1 = pageManager.create(pageModel.getPageParent(), pageModel.getPageName(),
 						pageModel.getPageTemplate(), pageModel.getPageTitle());
+
+				Node node;
+				try {
+					node = (Node) session.getItem(page1.getPath() + "/jcr:content");
+
+					if (node != null) {
+						LOG.info(node.getName());
+						node.setProperty("jcr:description", pageModel.getPageDescription());
+						node.setProperty("pageTitle", "CSV page title");
+						node.setProperty("navTitle", "csv nav title");
+						session.save();
+					} else {
+						LOG.info("Node is null");
+					}
+
+				} catch (RepositoryException e) {
+					e.printStackTrace();
+				}
 
 				LOG.info("*+=+++++++=+=++++++++ hi iam from imple try block after create page  ++===============***");
 				if (page1 != null) {

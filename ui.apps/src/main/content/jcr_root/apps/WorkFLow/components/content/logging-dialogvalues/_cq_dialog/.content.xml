@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Body"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container"
+        margin="{Boolean}false">
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <firstName
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="First Name"
+                        name="./firstName"/>
+                    <lastName
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Last Name"
+                        name="./lastName"/>
+                    <isGraduated
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                        checked="{Boolean}false"
+                        feildDescription="When checked He/she graduted"
+                        fieldLabel="Last Name"
+                        name="./graduate"
+                        text="Is Graduated"
+                        uncheckedValue="{Boolean}true"
+                        value="{Boolean}true"/>
+                    <phone
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                        fieldLabel="Phone Number"
+                        name="./phone"/>
+                    <multi
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <books
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                composite="{Boolean}false"
+                                fieldLabel="Books">
+                                <field
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fielLabel="Book Name"
+                                    name="./books"/>
+                            </books>
+                        </items>
+                    </multi>
+                    <myradiogroup
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup"
+                        name="./gender">
+                        <items jcr:primaryType="nt:unstructured">
+                            <option1
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/radio"
+                                text="Male"
+                                value="male"/>
+                            <option2
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/radio"
+                                text="Female"
+                                value="female"/>
+                            <option3
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/radio"
+                                text="Others"
+                                value="others"/>
+                        </items>
+                    </myradiogroup>
+                    <my-select
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        emptyText="Select"
+                        fieldLabel="Country"
+                        name="./country">
+                        <items jcr:primaryType="nt:unstructured">
+                            <option1
+                                jcr:primaryType="nt:unstructured"
+                                text="India"
+                                value="india"/>
+                            <option2
+                                jcr:primaryType="nt:unstructured"
+                                text="USA"
+                                value="america"/>
+                        </items>
+                    </my-select>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>
